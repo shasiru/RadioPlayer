@@ -1,16 +1,19 @@
-# radio_player
+# Radio Player Project
 
-A new Flutter project.
+## Minimal, Material UI based, Online Radio Player
 
-## Getting Started
+###### (Currently developing in MVP stage)
 
-This project is a starting point for a Flutter application.
+Unlike other online players, the radio stations directory will not be fetched via APIs. Instead, it will be fetched from explicit database which will be maintained regularly.
 
-A few resources to get you started if this is your first Flutter project:
+#### Planned Tasks
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [x] Initial project structure
+- [x] Integrate dependencies
+- [x] Basic player UI (play/ pause button & seek bar)
+- [x] Play/ Pause functionality with only one (hardcoded) static radio station
+- [x] Add list of radio stations (handpicked best stations & hardcoded)
+- [x] Switch between radio stations from the list
+- [ ] Create the DB for storing handpicked radio stations
+- [ ] Fetch stations from DB
+To be planned..!

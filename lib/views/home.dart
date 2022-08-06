@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:radio_player/player.dart';
 import 'package:radio_player/providers/radio_model.dart';
 
 import '../../main.dart';
+import '../player.dart';
 
 Widget home(BuildContext context) {
   var radioModel = Provider.of<RadioModel>(context, listen: true);

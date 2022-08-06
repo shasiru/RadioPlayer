@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:radio_player/page_manager.dart';
 import 'package:radio_player/providers/radio_model.dart';
-import 'package:radio_player/providers/views/home.dart';
+import 'package:radio_player/views/home.dart';
 
 late final PageManager pageManager;
 

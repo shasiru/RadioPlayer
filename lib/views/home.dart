@@ -14,7 +14,7 @@ Widget home(BuildContext context) {
             itemCount: radioModel.radioList.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text('Station: ${radioModel.radioList[index]['name']}'),
+                title: Text(radioModel.radioList[index]['name'] ?? 'N/A'),
                 onTap: () {
                   _handleListItemTap(context, index);
                 },

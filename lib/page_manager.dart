@@ -20,7 +20,6 @@ class PageManager {
   }
   void _init() async {
     _audioPlayer = AudioPlayer();
-    // await _audioPlayer.setUrl(url);
 
     _audioPlayer.playerStateStream.listen((playerState) {
       final isPlaying = playerState.playing;

@@ -1,17 +1,20 @@
-import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:just_waveform/just_waveform.dart';
 import 'package:provider/provider.dart';
 import 'package:radio_player/page_manager.dart';
+import 'package:radio_player/player.dart';
 import 'package:radio_player/providers/radio_model.dart';
+import 'package:radio_player/services/decode_radio_data.dart';
 import 'package:radio_player/views/home.dart';
+import 'package:rxdart/rxdart.dart' show BehaviorSubject;
 
 import 'firebase_options.dart';
 
 late final PageManager pageManager;
 late FirebaseDatabase firebaseDatabase;
+final progressStream = BehaviorSubject<WaveformProgress>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +43,7 @@ class MyAppState extends State<MyApp> {
     pageManager = PageManager();
     firebaseDatabase = FirebaseDatabase.instance;
     fetchDataFromFirebase();
+    initWaveForm();
   }
 
   @override
@@ -54,16 +58,9 @@ class MyAppState extends State<MyApp> {
   }
 
   fetchDataFromFirebase() async {
-    var radioModel = Provider.of<RadioModel>(context, listen: false);
     DatabaseReference dbRef = FirebaseDatabase.instance.ref('/');
     dbRef.onValue.listen((DatabaseEvent event) {
-      dynamic data = json.decode(json.encode(event.snapshot.value));
-      List<dynamic> radioMapList = data.toList();
-      List<Map<String, String>> mappedList = [];
-      for (var item in radioMapList) {
-        mappedList.add({'name': item['name'], 'url': item['url'].toString().replaceAll(RegExp(r"\s+"), "")});
-      }
-      radioModel.radioList = mappedList;
+      decodeRadioData(context, event);
     });
   }
 }

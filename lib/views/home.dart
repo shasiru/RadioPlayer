@@ -22,7 +22,7 @@ Widget home(BuildContext context) {
               );
             }),
       ),
-      SizedBox(height: 100, child: player(context, pageManager)),
+      SizedBox(height: 150, child: player(context, pageManager)),
     ],
   ));
 }

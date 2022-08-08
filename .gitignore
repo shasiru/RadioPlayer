@@ -51,3 +51,4 @@ app.*.map.json
 *.jfm
 
 android/app/google-services.json
+macos/Runner/GoogleService-Info.plist

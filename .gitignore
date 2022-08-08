@@ -49,3 +49,6 @@ app.*.map.json
 # iOS related 
 *.jfm
 
+android/app/google-services.json
+macos/Runner/GoogleService-Info.plist
+

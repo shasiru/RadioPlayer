@@ -17,3 +17,6 @@ Unlike other online players, the radio stations directory will not be fetched vi
 - [ ] Create the DB for storing handpicked radio stations
 - [ ] Fetch stations from DB
 To be planned..!
+
+>**Note**
+> Though this app is intended to support both Android and iOS platforms, Currently it's been tested with only android devices.

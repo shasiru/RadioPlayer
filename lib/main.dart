@@ -1,78 +1,66 @@
-// ignore_for_file: avoid_print
-
-import 'package:radio_player/player.dart';
-import 'package:radio_player/providers/player_model.dart';
-import 'package:radio_player/providers/radio_model.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:just_waveform/just_waveform.dart';
 import 'package:provider/provider.dart';
 import 'package:radio_player/page_manager.dart';
+import 'package:radio_player/player.dart';
+import 'package:radio_player/providers/radio_model.dart';
+import 'package:radio_player/services/decode_radio_data.dart';
+import 'package:radio_player/views/home.dart';
+import 'package:rxdart/rxdart.dart' show BehaviorSubject;
 
-void main() => runApp(
-      MultiProvider(providers: [
-        ChangeNotifierProvider(create: (context) => RadioModel()),
-        ChangeNotifierProvider(create: (context) => PlayerModel()),
-      ], child: const MyApp()),
-    );
+import 'firebase_options.dart';
+
+late final PageManager pageManager;
+late FirebaseDatabase firebaseDatabase;
+final progressStream = BehaviorSubject<WaveformProgress>();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: 'radio-player-stations',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => RadioModel()),
+    ], child: const MyApp()),
+  );
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-enum RadioStationProps { stationName, url }
-
-late final PageManager _pageManager;
-
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _pageManager = PageManager();
+    pageManager = PageManager();
+    firebaseDatabase = FirebaseDatabase.instance;
+    fetchDataFromFirebase();
+    initWaveForm();
   }
 
   @override
   void dispose() {
-    _pageManager.dispose();
+    pageManager.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var radioModel = Provider.of<RadioModel>(context, listen: true);
-
-    return MaterialApp(
-      home: Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: radioModel.radioList.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text('Station: ${radioModel.radioList[index]['name']}'),
-                          onTap: () {
-                            _handleListItemTap(index);
-                          },
-                          tileColor: radioModel.selectedStation['url'] == radioModel.radioList[index]['url']
-                              ? const Color.fromARGB(248, 175, 175, 242)
-                              : null,
-                        );
-                      }),
-                ),
-                SizedBox(height: 100, child: player(context, _pageManager)),
-              ],
-            )),
-      ),
-    );
+    return MaterialApp(home: Scaffold(body: Padding(padding: const EdgeInsets.all(20.0), child: home(context))));
   }
 
-  _handleListItemTap(int index) {
-    var radioModel = Provider.of<RadioModel>(context, listen: false);
-    radioModel.selectedStation = radioModel.radioList[index];
-    _pageManager.play(context);
+  fetchDataFromFirebase() async {
+    DatabaseReference dbRef = FirebaseDatabase.instance.ref('/');
+    dbRef.onValue.listen((DatabaseEvent event) {
+      decodeRadioData(context, event);
+    });
   }
 }

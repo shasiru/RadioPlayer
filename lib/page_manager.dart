@@ -1,7 +1,7 @@
-import 'package:radio_player/providers/radio_model.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
+import 'package:radio_player/providers/radio_model.dart';
 
 class PageManager {
   final progressNotifier = ValueNotifier<ProgressBarState>(
@@ -20,7 +20,6 @@ class PageManager {
   }
   void _init() async {
     _audioPlayer = AudioPlayer();
-    // await _audioPlayer.setUrl(url);
 
     _audioPlayer.playerStateStream.listen((playerState) {
       final isPlaying = playerState.playing;
@@ -70,7 +69,6 @@ class PageManager {
     var radioModel = Provider.of<RadioModel>(context, listen: false);
     await _audioPlayer.setUrl(radioModel.selectedStation['url'] ?? '');
     await _audioPlayer.play();
-    return true;
   }
 
   Future pause() async {

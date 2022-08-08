@@ -1,0 +1,44 @@
+[
+       {
+              "name": "1.FM Top 40",
+              "Genre": "Top 40",
+              "BitRate": 192,
+              "url": "http: //185.33.21.111:80/top40_64"
+       },
+       {
+              "name": "JOY Hits2",
+              "Genre": "Pop",
+              "BitRate": 128,
+              "url": "http: //51.210.241.217:8880/joyhits.mp3"
+       },
+       {
+              "name": "POWERHITZ.COM - THE OFFICEMIX -  Best Soft Rock And Pop",
+              "Genre": "Pop",
+              "BitRate": 128,
+              "url": "http: //216.235.89.134:80/officemix"
+       },
+       {
+              "name": "ANTENNE BAYERN Top 40",
+              "Genre": "Top 40",
+              "BitRate": 128,
+              "url": "http: //stream.antenne.de:80/top-40"
+       },
+       {
+              "name": "Dance Wave!",
+              "Genre": "Electronic",
+              "BitRate": 128,
+              "url": "http://135.125.239.164:8080/dance.mp3"
+       },
+       {
+              "name": "HOT 108 JAMZ - #1 FOR HIP HOP - www.hot108.com (a Powerhitz.com station)",
+              "Genre": "Hip Hop",
+              "BitRate": 128,
+              "url": "http://216.235.89.134:80/hot108"
+       },
+       {
+              "name": "POWERHITZ.COM - 1POWER - #1 For Hitz & Hip Hop",
+              "Genre": "Hip Hop",
+              "BitRate": 128,
+              "url": "http://216.235.89.134:80/1power"
+       }
+]

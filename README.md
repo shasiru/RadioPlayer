@@ -2,9 +2,9 @@
 
 ## Minimal, Material UI based, Online Radio Player
 
-###### (Currently developing in MVP stage)
+###### (Currently in MVP stage)
 
-Unlike other online players, the radio stations directory will not be fetched via APIs. Instead, it will be fetched from explicit database which will be maintained regularly.
+Unlike other online players, the radio stations directory will not be fetched via public APIs. Instead, it's fetched from explicit database which contains only hand picked radio stations.
 
 #### Planned Tasks
 
@@ -20,4 +20,6 @@ Unlike other online players, the radio stations directory will not be fetched vi
 - [x] Added an animated avatar in the background
 
 >**Note**
-> Though this app is intended to support both Android and iOS platforms, Currently it's been tested with only android devices.
+>
+> - Though this app is intended to support both Android and iOS platforms, Currently it's been tested with only android devices.
+> - This repo is currently implemented with a private Firebase Realtime Database. You may need to add your own firebase database and add the appropriate firebase configurations to the app so it'll generate and add the correct google-services.json to your project.

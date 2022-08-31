@@ -8,21 +8,17 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:radio_player/page_manager.dart';
+import 'package:radio_player/providers/animation_provider.dart';
 import 'package:radio_player/providers/radio_model.dart';
 
 import 'components/audio_wave_form_widget.dart';
 import 'main.dart';
 
-Widget player(
-  BuildContext context,
-  PageManager pageManager,
-) {
+Widget player(BuildContext context, PageManager pageManager) {
   return Column(
     children: [
       const Spacer(),
-      waveFormContainer(),
-      const Spacer(),
-      playIcon(context, pageManager),
+      Container(padding: const EdgeInsets.only(bottom: 20), child: playIcon(context, pageManager)),
     ],
   );
 }
@@ -45,7 +41,7 @@ Widget waveFormContainer() {
       child: Container(
           height: 70.0,
           decoration: BoxDecoration(
-            color: Colors.grey.shade200,
+            color: Colors.limeAccent.shade700,
             borderRadius: const BorderRadius.all(Radius.circular(20.0)),
           ),
           padding: const EdgeInsets.all(16.0),
@@ -114,6 +110,7 @@ String? minAndSecondsConvertor(int value) {
 }
 
 Widget playIcon(BuildContext context, PageManager pageManager) {
+  final animationProvider = Provider.of<AnimationProvider>(context, listen: false);
   return (ValueListenableBuilder<ButtonState>(
     valueListenable: pageManager.buttonNotifier,
     builder: (_, value, __) {
@@ -121,24 +118,27 @@ Widget playIcon(BuildContext context, PageManager pageManager) {
         case ButtonState.loading:
           return Container(
             margin: const EdgeInsets.all(8.0),
-            width: 32.0,
-            height: 32.0,
+            width: 50.0,
+            height: 50.0,
             child: const CircularProgressIndicator(),
           );
         case ButtonState.paused:
           return IconButton(
               icon: const Icon(Icons.play_arrow),
-              iconSize: 32.0,
+              iconSize: 50.0,
               onPressed: () {
                 _handleSettingSelectedStation(context);
                 pageManager.play(context);
+                animationProvider.isRadioPlaying = true;
               });
         case ButtonState.playing:
           return IconButton(
-            icon: const Icon(Icons.pause),
-            iconSize: 32.0,
-            onPressed: pageManager.pause,
-          );
+              icon: const Icon(Icons.pause),
+              iconSize: 50.0,
+              onPressed: () {
+                pageManager.pause();
+                animationProvider.isRadioPlaying = false;
+              });
       }
     },
   ));

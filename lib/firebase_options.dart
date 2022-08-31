@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,45 +52,12 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBlagCeIY0sdb5TSbshsdkUuA1qf4-ynro',
-    appId: '1:342504969993:web:1cb8d10edde37c1759a5d8',
-    messagingSenderId: '342504969993',
-    projectId: 'radio-player-stations',
-    authDomain: 'radio-player-stations.firebaseapp.com',
-    databaseURL: 'https://radio-player-stations-default-rtdb.firebaseio.com',
-    storageBucket: 'radio-player-stations.appspot.com',
-    measurementId: 'G-0BC07N0155',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBs2wvLyPepNdQBbW-jDZMfM7OAL2GL9BY',
-    appId: '1:342504969993:android:4e7d6ad318ee1b2659a5d8',
+    appId: '1:342504969993:android:fa178a348561076d59a5d8',
     messagingSenderId: '342504969993',
     projectId: 'radio-player-stations',
     databaseURL: 'https://radio-player-stations-default-rtdb.firebaseio.com',
     storageBucket: 'radio-player-stations.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC0CrIr_mpSn1EphA06W1zwCxs5RF6FDec',
-    appId: '1:342504969993:ios:af621394f56673bc59a5d8',
-    messagingSenderId: '342504969993',
-    projectId: 'radio-player-stations',
-    databaseURL: 'https://radio-player-stations-default-rtdb.firebaseio.com',
-    storageBucket: 'radio-player-stations.appspot.com',
-    iosClientId: '342504969993-44ouehekpejp0b1lck72befql8av6sht.apps.googleusercontent.com',
-    iosBundleId: 'com.example.radioPlayer',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC0CrIr_mpSn1EphA06W1zwCxs5RF6FDec',
-    appId: '1:342504969993:ios:af621394f56673bc59a5d8',
-    messagingSenderId: '342504969993',
-    projectId: 'radio-player-stations',
-    databaseURL: 'https://radio-player-stations-default-rtdb.firebaseio.com',
-    storageBucket: 'radio-player-stations.appspot.com',
-    iosClientId: '342504969993-44ouehekpejp0b1lck72befql8av6sht.apps.googleusercontent.com',
-    iosBundleId: 'com.example.radioPlayer',
   );
 }

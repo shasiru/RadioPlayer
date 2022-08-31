@@ -73,10 +73,10 @@ class MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         /* light theme settings */
       ),
-      darkTheme: ThemeData(brightness: Brightness.dark, canvasColor: Color.fromARGB(255, 35, 35, 35)
+      darkTheme: ThemeData(brightness: Brightness.dark, canvasColor: const Color.fromARGB(255, 35, 35, 35)
           /* dark theme settings */
           ),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       /* ThemeMode.system to follow system theme, 
          ThemeMode.light for light theme, 
          ThemeMode.dark for dark theme
